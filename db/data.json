@@ -1,0 +1,60 @@
+{
+  "products": [
+    {
+      "name": "iPhone 14",
+      "categoryId": 1,
+      "price": 25000000,
+      "id": 1
+    },
+    {
+      "name": "iPhone 14 Pro",
+      "categoryId": 1,
+      "price": 30000000,
+      "id": 2
+    },
+    {
+      "name": "Samsung Note 20",
+      "categoryId": 2,
+      "price": 15000000,
+      "id": 3
+    },
+    {
+      "name": "Samsung Note 20",
+      "categoryId": 2,
+      "price": 15000000,
+      "id": 4
+    },
+    {
+      "name": "Xiaomi Mi 13",
+      "categoryId": 3,
+      "price": 20000000,
+      "id": 5
+    },
+    {
+      "name": "Samsung Note 21",
+      "categoryId": 2,
+      "price": 15000000,
+      "id": 6
+    },
+    {
+      "name": "Xiaomi Mi 14",
+      "categoryId": 3,
+      "price": 20000000,
+      "id": 7
+    }
+  ],
+  "categories": [
+    {
+      "id": 1,
+      "name": "Apple"
+    },
+    {
+      "id": 2,
+      "name": "Samsung"
+    },
+    {
+      "id": 3,
+      "name": "Xiaomi"
+    }
+  ]
+}
