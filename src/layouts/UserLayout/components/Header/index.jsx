@@ -1,13 +1,17 @@
 import { Link } from "react-router-dom";
-import { Button } from "antd";
+import { Space, Button } from "antd";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 import { ROUTES } from "constants/routes";
+import { setTheme } from "redux/slicers/common.slice";
 
 import * as S from "./styles";
 
 function AdminHeader() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   return (
     <S.HeaderWrapper>
       <h3>Logo</h3>
@@ -16,9 +20,15 @@ function AdminHeader() {
           <h4>Product</h4>
         </S.NavLinkItem>
       </S.NavLinkContainer>
-      <div>
-        <Button>Login</Button>
-      </div>
+      <Space>
+        <Button onClick={() => dispatch(setTheme({ theme: "light" }))}>
+          Light
+        </Button>
+        <Button onClick={() => dispatch(setTheme({ theme: "dark" }))}>
+          Dark
+        </Button>
+        <Button type="primary">Login</Button>
+      </Space>
     </S.HeaderWrapper>
   );
 }
