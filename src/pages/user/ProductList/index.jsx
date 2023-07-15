@@ -1,12 +1,14 @@
 import { useState, useEffect, useMemo } from "react";
-import { Card, Row, Col, Checkbox, Input, Select } from "antd";
+import { Card, Row, Col, Checkbox, Input, Select, Button } from "antd";
 import { useDispatch, useSelector } from "react-redux";
+import { Link, generatePath } from "react-router-dom";
 
 import { PRODUCT_LIMIT } from "constants/paging";
 import { getProductListRequest } from "redux/slicers/product.slice";
 import { getCategoryListRequest } from "redux/slicers/category.slice";
 
 import * as S from "./styles";
+import { ROUTES } from "constants/routes";
 
 function ProductListPage() {
   const [filterParams, setFilterParams] = useState({
@@ -48,6 +50,17 @@ function ProductListPage() {
     );
   };
 
+  const handleShowMore = () => {
+    dispatch(
+      getProductListRequest({
+        ...filterParams,
+        page: productList.meta.page + 1,
+        limit: PRODUCT_LIMIT,
+        more: true,
+      })
+    );
+  };
+
   const renderCategoryList = useMemo(() => {
     return categoryList.data.map((item) => {
       return (
@@ -62,9 +75,11 @@ function ProductListPage() {
     return productList.data.map((item) => {
       return (
         <Col key={item.id} xs={12} xl={8}>
-          <Card title={item.name} size="small">
-            <p>{item.price.toLocaleString()} VND</p>
-          </Card>
+          <Link to={generatePath(ROUTES.USER.PRODUCT_DETAIL, { id: item.id })}>
+            <Card title={item.name} size="small">
+              <p>{item.price.toLocaleString()} VND</p>
+            </Card>
+          </Link>
         </Col>
       );
     });
@@ -102,6 +117,11 @@ function ProductListPage() {
             </Col>
           </Row>
           <Row gutter={[16, 16]}>{renderProductList}</Row>
+          {productList.data.length !== productList.meta.total && (
+            <Row justify="center" style={{ marginTop: 16 }}>
+              <Button onClick={() => handleShowMore()}>Hiểu thị thêm</Button>
+            </Row>
+          )}
         </Col>
       </Row>
     </S.ProductListWrapper>
