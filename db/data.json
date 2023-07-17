@@ -1,5 +1,14 @@
 {
-  "users": [],
+  "users": [
+    {
+      "email": "tuan@gmail.com",
+      "password": "$2a$10$qcO9hYR2Dzx1zRuCgLsOJ.p84bqW/YuVkGHYMSu1syZUBQToCD7ta",
+      "fullName": "Tuan",
+      "createdAt": 1689594520064,
+      "updatedAt": 1689594520065,
+      "id": 1
+    }
+  ],
   "products": [
     {
       "name": "iPhone 14",
@@ -56,6 +65,15 @@
     {
       "id": 3,
       "name": "Xiaomi"
+    }
+  ],
+  "reviews": [
+    {
+      "id": 1,
+      "userId": 1,
+      "productId": 2,
+      "comment": "Ahihi",
+      "rate": 5
     }
   ]
 }

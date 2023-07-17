@@ -77,6 +77,7 @@ function ProductListPage() {
         <Col key={item.id} xs={12} xl={8}>
           <Link to={generatePath(ROUTES.USER.PRODUCT_DETAIL, { id: item.id })}>
             <Card title={item.name} size="small">
+              <p>{item.reviews.length} đánh giá</p>
               <p>{item.price.toLocaleString()} VND</p>
             </Card>
           </Link>

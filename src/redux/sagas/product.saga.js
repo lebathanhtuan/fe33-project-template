@@ -19,6 +19,8 @@ function* getProductListSaga(action) {
     };
     const result = yield axios.get("http://localhost:4000/products", {
       params: {
+        _expand: "category",
+        _embed: "reviews",
         _page: page,
         _limit: limit,
         categoryId: categoryId,

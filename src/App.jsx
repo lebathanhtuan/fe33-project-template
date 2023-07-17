@@ -1,6 +1,8 @@
+import { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import jwtDecode from "jwt-decode";
 
 import UserLayout from "layouts/UserLayout";
 
@@ -11,10 +13,26 @@ import LoginPage from "pages/Login";
 import RegisterPage from "pages/Register";
 
 import { ROUTES } from "constants/routes";
+import { getUserInfoRequest } from "redux/slicers/auth.slice";
 import { light, dark } from "themes";
 
 function App() {
+  const dispatch = useDispatch();
+
   const { theme } = useSelector((state) => state.common);
+
+  useEffect(() => {
+    const accessToken = localStorage.getItem("accessToken");
+    if (accessToken) {
+      const tokenData = jwtDecode(accessToken);
+      dispatch(
+        getUserInfoRequest({
+          id: parseInt(tokenData.sub),
+        })
+      );
+    }
+  }, []);
+
   return (
     <ThemeProvider theme={theme === "light" ? light : dark}>
       <Routes>

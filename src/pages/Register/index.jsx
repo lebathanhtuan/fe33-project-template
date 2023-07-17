@@ -1,16 +1,53 @@
-import React from "react";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { Form, Input, Button } from "antd";
+
+import { ROUTES } from "constants/routes";
+import { registerRequest } from "redux/slicers/auth.slice";
 
 import * as S from "./styles";
 
 const RegisterPage = () => {
+  const [registerForm] = Form.useForm();
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const { registerData } = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    if (registerData.error) {
+      registerForm.setFields([
+        {
+          name: "email",
+          errors: [registerData.error],
+        },
+      ]);
+    }
+  }, [registerData.error]);
+
+  const handleSubmit = (values) => {
+    dispatch(
+      registerRequest({
+        data: {
+          fullName: values.fullName,
+          email: values.email,
+          password: values.password,
+        },
+        callback: () => navigate(ROUTES.LOGIN),
+      })
+    );
+  };
+
   return (
     <S.RegisterContainer>
       <S.RegisterForm>
         <Form
+          form={registerForm}
           name="registerForm"
           layout="vertical"
-          onFinish={(values) => console.log(values)}
+          onFinish={(values) => handleSubmit(values)}
           autoComplete="off"
         >
           <Form.Item
@@ -57,11 +94,11 @@ const RegisterPage = () => {
                 required: true,
                 message: "Mật khẩu là bắt buộc",
               },
-              {
-                pattern:
-                  /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(?=.{8,})/g,
-                message: "Mật khẩu yếu",
-              },
+              // {
+              //   pattern:
+              //     /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(?=.{8,})/g,
+              //   message: "Mật khẩu yếu",
+              // },
             ]}
           >
             <Input.Password />

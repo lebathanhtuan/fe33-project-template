@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import { ConfigProvider } from "antd";
+import "moment/locale/vi";
 
 import App from "./App";
 import { store } from "./store";
