@@ -4,6 +4,7 @@ import createSagaMiddleware from "redux-saga";
 import authReducer from "redux/slicers/auth.slice";
 import productReducer from "redux/slicers/product.slice";
 import categoryReducer from "redux/slicers/category.slice";
+import reviewReducer from "redux/slicers/review.slice";
 import commonReducer from "redux/slicers/common.slice";
 
 import rootSaga from "redux/sagas";
@@ -15,6 +16,7 @@ const store = configureStore({
     auth: authReducer,
     product: productReducer,
     category: categoryReducer,
+    review: reviewReducer,
     common: commonReducer,
   },
   middleware: (getDefaultMiddleware) => [

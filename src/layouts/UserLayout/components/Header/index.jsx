@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
-import { Space, Button } from "antd";
+import { Space, Button, Dropdown } from "antd";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import moment from "moment";
 
 import { ROUTES } from "constants/routes";
 import { setTheme } from "redux/slicers/common.slice";
+import { logoutRequest } from "redux/slicers/auth.slice";
 
 import * as S from "./styles";
 
@@ -31,13 +31,25 @@ function AdminHeader() {
           Dark
         </Button>
         {userInfo.data.id ? (
-          <div>
-            <h3>{userInfo.data.fullName}</h3>
-            <h6>
-              {moment(userInfo.data.createdAt).format("DD/MM/YYYY HH:mm")}
-            </h6>
-            <h6>{moment(userInfo.data.createdAt).fromNow()}</h6>
-          </div>
+          <Dropdown
+            menu={{
+              items: [
+                {
+                  key: 1,
+                  label: "Thông tin cá nhân",
+                },
+                {
+                  key: 2,
+                  label: "Đăng xuất",
+                  onClick: () => dispatch(logoutRequest()),
+                },
+              ],
+            }}
+          >
+            <div>
+              <h3>{userInfo.data.fullName}</h3>
+            </div>
+          </Dropdown>
         ) : (
           <Button type="primary" onClick={() => navigate(ROUTES.LOGIN)}>
             Login

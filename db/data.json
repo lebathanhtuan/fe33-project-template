@@ -69,11 +69,58 @@
   ],
   "reviews": [
     {
-      "id": 1,
+      "rate": 5,
+      "comment": "123321",
       "userId": 1,
       "productId": 2,
-      "comment": "Ahihi",
-      "rate": 5
+      "createdAt": 1689768339065,
+      "updatedAt": 1689768339065,
+      "id": 2
+    },
+    {
+      "rate": 4,
+      "comment": "Xau",
+      "userId": 1,
+      "productId": 1,
+      "createdAt": 1689768733099,
+      "updatedAt": 1689768733100,
+      "id": 3
+    },
+    {
+      "rate": 2,
+      "comment": "qweewq",
+      "userId": 1,
+      "productId": 2,
+      "createdAt": 1689769302176,
+      "updatedAt": 1689769302176,
+      "id": 4
+    },
+    {
+      "rate": 3,
+      "comment": "asddsa",
+      "userId": 1,
+      "productId": 2,
+      "createdAt": 1689769456920,
+      "updatedAt": 1689769456920,
+      "id": 5
+    },
+    {
+      "rate": 4,
+      "comment": "asdfsad",
+      "userId": 1,
+      "productId": 2,
+      "createdAt": 1689769501469,
+      "updatedAt": 1689769501469,
+      "id": 6
+    },
+    {
+      "rate": 4,
+      "comment": "asdasd",
+      "userId": 1,
+      "productId": 2,
+      "createdAt": 1689769932260,
+      "updatedAt": 1689769932262,
+      "id": 7
     }
   ]
 }

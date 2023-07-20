@@ -48,6 +48,11 @@ export const authSlice = createSlice({
       state.registerData.loading = false;
       state.registerData.error = error;
     },
+    // logout
+    logoutRequest: (state, action) => {
+      localStorage.removeItem("accessToken");
+      state.userInfo.data = {};
+    },
     // getUserInfo
     getUserInfoRequest: (state, action) => {
       state.userInfo.loading = true;
@@ -73,6 +78,7 @@ export const {
   registerRequest,
   registerSuccess,
   registerFailure,
+  logoutRequest,
   getUserInfoRequest,
   getUserInfoSuccess,
   getUserInfoFailure,

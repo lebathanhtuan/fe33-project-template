@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Form, Input, Button, Checkbox } from "antd";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, Navigate } from "react-router-dom";
 
 import { ROUTES } from "constants/routes";
 import { loginRequest } from "redux/slicers/auth.slice";
@@ -15,6 +15,8 @@ const LoginPage = () => {
   const navigate = useNavigate();
 
   const { loginData } = useSelector((state) => state.auth);
+
+  const accessToken = localStorage.getItem("accessToken");
 
   useEffect(() => {
     if (loginData.error) {
@@ -40,6 +42,7 @@ const LoginPage = () => {
     );
   };
 
+  if (accessToken) return <Navigate to={ROUTES.USER.HOME} />;
   return (
     <S.LoginContainer>
       <S.LoginForm>

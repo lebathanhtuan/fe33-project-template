@@ -25,6 +25,7 @@ function App() {
     const accessToken = localStorage.getItem("accessToken");
     if (accessToken) {
       const tokenData = jwtDecode(accessToken);
+      console.log("🚀 ~ file: App.jsx:28 ~ useEffect ~ tokenData:", tokenData);
       dispatch(
         getUserInfoRequest({
           id: parseInt(tokenData.sub),
