@@ -27,11 +27,13 @@ import {
   createReviewRequest,
   getReviewListRequest,
 } from "redux/slicers/review.slice";
+import { addToCartRequest } from "redux/slicers/cart.slice";
 import { ROUTES } from "constants/routes";
 
 import * as S from "./styles";
 
 const ProductDetailPage = () => {
+  const [quantity, setQuantity] = useState(1);
   const [reviewForm] = Form.useForm();
   const { id } = useParams();
 
@@ -48,6 +50,20 @@ const ProductDetailPage = () => {
     dispatch(getProductDetailRequest({ id: parseInt(id) }));
     dispatch(getReviewListRequest({ productId: parseInt(id) }));
   }, []);
+
+  const handleAddToCart = () => {
+    dispatch(
+      addToCartRequest({
+        data: {
+          productId: productDetail.data.id,
+          name: productDetail.data.name,
+          price: productDetail.data.price,
+          quantity: quantity,
+        },
+      })
+    );
+    notification.success({ message: "Bỏ vào giỏ thành công" });
+  };
 
   const renderReviewList = useMemo(() => {
     return reviewList.data.map((item) => {
@@ -103,7 +119,19 @@ const ProductDetailPage = () => {
             </div>
             <h3>{productDetail.data.category?.name}</h3>
             <h2>{productDetail.data.price?.toLocaleString()} VND</h2>
-            <Button size="large" type="primary" icon={<ShoppingCartOutlined />}>
+            <div style={{ margin: "8px 0" }}>
+              <InputNumber
+                value={quantity}
+                min={1}
+                onChange={(value) => setQuantity(value)}
+              />
+            </div>
+            <Button
+              size="large"
+              type="primary"
+              icon={<ShoppingCartOutlined />}
+              onClick={() => handleAddToCart()}
+            >
               Add to cart
             </Button>
           </Col>

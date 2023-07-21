@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
-import { Space, Button, Dropdown } from "antd";
+import { Space, Button, Dropdown, Badge } from "antd";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { ShoppingCartOutlined } from "@ant-design/icons";
 
 import { ROUTES } from "constants/routes";
 import { setTheme } from "redux/slicers/common.slice";
@@ -14,6 +15,7 @@ function AdminHeader() {
   const dispatch = useDispatch();
 
   const { userInfo } = useSelector((state) => state.auth);
+  const { cartList } = useSelector((state) => state.cart);
 
   return (
     <S.HeaderWrapper>
@@ -23,7 +25,12 @@ function AdminHeader() {
           <h4>Product</h4>
         </S.NavLinkItem>
       </S.NavLinkContainer>
-      <Space>
+      <Space size={16}>
+        <Badge count={cartList.length}>
+          <Link to={ROUTES.USER.CART}>
+            <Button type="text" icon={<ShoppingCartOutlined />}></Button>
+          </Link>
+        </Badge>
         <Button onClick={() => dispatch(setTheme({ theme: "light" }))}>
           Light
         </Button>

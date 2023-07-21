@@ -9,6 +9,7 @@ import UserLayout from "layouts/UserLayout";
 import HomePage from "pages/user/Home";
 import ProductListPage from "pages/user/ProductList";
 import ProductDetailPage from "pages/user/ProductDetail";
+import CartPage from "pages/user/Cart";
 import LoginPage from "pages/Login";
 import RegisterPage from "pages/Register";
 
@@ -47,6 +48,7 @@ function App() {
             path={ROUTES.USER.PRODUCT_DETAIL}
             element={<ProductDetailPage />}
           />
+          <Route path={ROUTES.USER.CART} element={<CartPage />} />
         </Route>
         <Route path={ROUTES.LOGIN} element={<LoginPage />} />
         <Route path={ROUTES.REGISTER} element={<RegisterPage />} />
