@@ -1,13 +1,15 @@
-import { useMemo } from "react";
-import { Button, Table, InputNumber } from "antd";
+import { Table, Button, InputNumber, Row, Col, Card } from "antd";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
+import { ROUTES } from "constants/routes";
 import { updateCartRequest, deleteCartRequest } from "redux/slicers/cart.slice";
 
 import * as S from "./styles";
 
 function CartPage() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const { cartList } = useSelector((state) => state.cart);
 
@@ -75,11 +77,33 @@ function CartPage() {
   ];
 
   return (
-    <div>
-      <h2>Cart Page</h2>
-      <Table columns={tableColumn} dataSource={cartList} pagination={false} />
-      <h4>Tổng tiền: {`${totalPrice.toLocaleString()} VNĐ`}</h4>
-    </div>
+    <S.CartListWrapper>
+      <h2 style={{ marginBottom: 24 }}>Giỏ hàng</h2>
+      <Card size="small">
+        <Table
+          columns={tableColumn}
+          dataSource={cartList}
+          rowKey="id"
+          pagination={false}
+        />
+      </Card>
+      <Row justify="end" style={{ margin: "24px 0" }}>
+        <Col span={8}>
+          <Card size="small" title="Tổng tiền">
+            {totalPrice.toLocaleString()} VND
+          </Card>
+        </Col>
+      </Row>
+      <Row justify="end">
+        <Button
+          type="primary"
+          disabled={cartList.length === 0}
+          onClick={() => navigate(ROUTES.USER.CHECKOUT)}
+        >
+          Tiếp theo
+        </Button>
+      </Row>
+    </S.CartListWrapper>
   );
 }
 

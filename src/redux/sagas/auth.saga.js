@@ -11,6 +11,12 @@ import {
   getUserInfoRequest,
   getUserInfoSuccess,
   getUserInfoFailure,
+  updateUserInfoRequest,
+  updateUserInfoSuccess,
+  updateUserInfoFailure,
+  changePasswordRequest,
+  changePasswordSuccess,
+  changePasswordFailure,
 } from "redux/slicers/auth.slice";
 
 function* loginSaga(action) {
@@ -50,8 +56,37 @@ function* getUserInfoSaga(action) {
   }
 }
 
+function* updateUserInfoSaga(action) {
+  try {
+    const { id, data } = action.payload;
+    const result = yield axios.patch(`http://localhost:4000/users/${id}`, data);
+    yield put(updateUserInfoSuccess({ data: result.data }));
+  } catch (e) {
+    yield put(updateUserInfoFailure({ error: "Lỗi" }));
+  }
+}
+
+function* changePasswordSaga(action) {
+  try {
+    const { id, data, callback } = action.payload;
+    yield axios.post("http://localhost:4000/login", {
+      email: data.email,
+      password: data.password,
+    });
+    const result = yield axios.patch(`http://localhost:4000/users/${id}`, {
+      password: data.newPassword,
+    });
+    callback();
+    yield put(changePasswordSuccess({ data: result.data }));
+  } catch (e) {
+    yield put(changePasswordFailure({ error: "Lỗi" }));
+  }
+}
+
 export default function* categorySaga() {
   yield takeEvery(loginRequest.type, loginSaga);
   yield takeEvery(registerRequest.type, registerSaga);
   yield takeEvery(getUserInfoRequest.type, getUserInfoSaga);
+  yield takeEvery(updateUserInfoRequest.type, updateUserInfoSaga);
+  yield takeEvery(changePasswordRequest.type, changePasswordSaga);
 }

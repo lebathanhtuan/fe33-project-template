@@ -1,53 +1,53 @@
-import { useState, useEffect, useMemo } from "react";
-import { Card, Row, Col, Checkbox, Input, Select, Button } from "antd";
+import { useEffect, useMemo } from "react";
+import { Card, Row, Col, Checkbox, Select, Button } from "antd";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, generatePath } from "react-router-dom";
+import { Link, generatePath, useNavigate } from "react-router-dom";
+import qs from "qs";
 
 import { PRODUCT_LIMIT } from "constants/paging";
 import { getProductListRequest } from "redux/slicers/product.slice";
-import { getCategoryListRequest } from "redux/slicers/category.slice";
+import { setFilterParams, clearFilterParams } from "redux/slicers/common.slice";
 
 import * as S from "./styles";
 import { ROUTES } from "constants/routes";
 
 function ProductListPage() {
-  const [filterParams, setFilterParams] = useState({
-    categoryId: [],
-    keyword: "",
-    order: "",
-  });
-  console.log(
-    "🚀 ~ file: index.jsx:18 ~ ProductListPage ~ filterParams:",
-    filterParams
-  );
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const { productList } = useSelector((state) => state.product);
   const { categoryList } = useSelector((state) => state.category);
+  const { filterParams } = useSelector((state) => state.common);
 
   useEffect(() => {
     dispatch(
       getProductListRequest({
+        ...filterParams,
         page: 1,
         limit: PRODUCT_LIMIT,
       })
     );
-    dispatch(getCategoryListRequest());
+
+    return () => dispatch(clearFilterParams());
   }, []);
 
-  const handleFilter = (key, values) => {
-    setFilterParams({
+  const handleFilter = (key, value) => {
+    const newFilterParams = {
       ...filterParams,
-      [key]: values,
-    });
+      [key]: value,
+    };
+    dispatch(setFilterParams(newFilterParams));
     dispatch(
       getProductListRequest({
-        ...filterParams,
-        [key]: values,
+        ...newFilterParams,
         page: 1,
         limit: PRODUCT_LIMIT,
       })
     );
+    navigate({
+      pathname: ROUTES.USER.PRODUCT_LIST,
+      search: qs.stringify(newFilterParams),
+    });
   };
 
   const handleShowMore = () => {
@@ -76,7 +76,7 @@ function ProductListPage() {
       return (
         <Col key={item.id} xs={12} xl={8}>
           <Link to={generatePath(ROUTES.USER.PRODUCT_DETAIL, { id: item.id })}>
-            <Card title={item.name} size="small">
+            <Card title={item.name} size="small" bordered={false}>
               <p>{item.reviews.length} đánh giá</p>
               <p>{item.price.toLocaleString()} VND</p>
             </Card>
@@ -90,31 +90,35 @@ function ProductListPage() {
     <S.ProductListWrapper>
       <Row gutter={[16, 16]}>
         <Col lg={6} xs={24}>
-          <Card title="Filter" size="small">
+          <Card title="Filter" size="small" bordered={false}>
             <Checkbox.Group
               onChange={(values) => handleFilter("categoryId", values)}
+              value={filterParams.categoryId}
             >
               <Row>{renderCategoryList}</Row>
             </Checkbox.Group>
           </Card>
         </Col>
         <Col lg={18} xs={24}>
-          <Row gutter={[16, 16]} style={{ marginBottom: 16 }}>
+          <Row align="middle" gutter={[16, 16]} style={{ marginBottom: 16 }}>
             <Col md={16} xs={24}>
-              <Input
-                onChange={(e) => handleFilter("keyword", e.target.value)}
-              />
+              <p>Tìm thấy: {productList.meta.total} kết quả</p>
             </Col>
             <Col md={8} xs={24}>
-              <Select
-                onChange={(value) => handleFilter("sort", value)}
-                style={{ width: "100%" }}
-              >
-                <Select.Option value="name.asc">A-Z</Select.Option>
-                <Select.Option value="name.desc">Z-A</Select.Option>
-                <Select.Option value="price.asc">Giá tăng dần</Select.Option>
-                <Select.Option value="price.desc">Giá giảm dần</Select.Option>
-              </Select>
+              <Row align="middle">
+                <p>Sắp xếp theo:</p>
+                <Select
+                  onChange={(value) => handleFilter("sort", value)}
+                  value={filterParams.sort}
+                  placeholder="Sắp xếp"
+                  style={{ marginLeft: 8, flex: 1 }}
+                >
+                  <Select.Option value="name.asc">A-Z</Select.Option>
+                  <Select.Option value="name.desc">Z-A</Select.Option>
+                  <Select.Option value="price.asc">Giá tăng dần</Select.Option>
+                  <Select.Option value="price.desc">Giá giảm dần</Select.Option>
+                </Select>
+              </Row>
             </Col>
           </Row>
           <Row gutter={[16, 16]}>{renderProductList}</Row>

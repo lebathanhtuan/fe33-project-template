@@ -12,7 +12,7 @@ function* getCategoryListSaga(action) {
     const result = yield axios.get("http://localhost:4000/categories");
     yield put(getCategoryListSuccess({ data: result.data }));
   } catch (e) {
-    yield put(getCategoryListFailure("Đã có lỗi xảy ra!"));
+    yield put(getCategoryListFailure({ error: "Lỗi" }));
   }
 }
 
