@@ -6,7 +6,19 @@ export const ProductDetailWrapper = styled.div`
   max-width: 1232px;
 `;
 
+export const ProductContent = styled.div`
+  & img {
+    width: 100%;
+    height: auto;
+  }
+`;
+
 export const ReviewFormWrapper = styled.div`
-  padding: 16px;
-  background-color: #e6e6e6;
+  padding: 12px;
+  border-radius: 4px;
+  background-color: #f0f2f5;
+`;
+
+export const ReviewItemWrapper = styled.div`
+  margin-top: 8px;
 `;

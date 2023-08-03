@@ -2,11 +2,19 @@
   "users": [
     {
       "email": "tuan@gmail.com",
-      "password": "$2a$10$qcO9hYR2Dzx1zRuCgLsOJ.p84bqW/YuVkGHYMSu1syZUBQToCD7ta",
+      "password": "$2a$10$sbtPd0W0ltD6xWB0vlMFSOE21QRlwoppGWLccSRRdqPrsPOb2FOb6",
       "fullName": "Tuan",
       "createdAt": 1689594520064,
-      "updatedAt": 1689594520065,
+      "updatedAt": 1690950962653,
       "id": 1
+    },
+    {
+      "email": "tuanadmin@gmail.com",
+      "password": "$2a$10$/jB8YFLeWAw98LqbqAri4uOFIV/6C0.4io5VXUrRldnG99uiZbdcm",
+      "fullName": "Tuan Admin",
+      "createdAt": 1690979624095,
+      "updatedAt": 1690979624095,
+      "id": 2
     }
   ],
   "products": [
@@ -14,6 +22,7 @@
       "name": "iPhone 14",
       "categoryId": 1,
       "price": 25000000,
+      "content": "<h3 class=\"ql-align-justify\">Thiết kế trẻ trung, hiện đại</h3><p class=\"ql-align-justify\"> <a href=\"https://www.thegioididong.com/dong-ho-thong-minh/samsung-galaxy-watch-4-lte-classic-46mm\" target=\"_blank\" style=\"color: rgb(47, 128, 237);\">Samsung Galaxy Watch 4 LTE Classic 46mm</a>&nbsp;mang nét sang trọng, hiện đại cùng với bộ khung viền thép không gỉ cứng cáp, màn hình SUPER AMOLED được bao bọc bởi lớp kính cường lực Gorrilla Glass Dx+ bền bỉ, chịu lực tốt.&nbsp; <a href=\"https://www.thegioididong.com/dong-ho-thong-minh?g=silicone\" target=\"_blank\" style=\"color: rgb(47, 128, 237);\">Dây đeo silicone</a>&nbsp;êm nhẹ, độ đàn hồi cao, không thấm nước, thiết kế đục lỗ cho người dùng sự thông thoáng khi mang.</p><p class=\"ql-align-justify\"> <br></p><p class=\"ql-align-justify\"> <a href=\"https://cdn.tgdd.vn/Products/Images/7077/248765/samsung-galaxy-watch-4-lte-classic-46mm-1.jpg\" target=\"_blank\" style=\"color: rgb(47, 128, 237);\"> <img src=\"https://cdn.tgdd.vn/Products/Images/7077/248765/samsung-galaxy-watch-4-lte-classic-46mm-1.jpg\" alt=\"Samsung Galaxy Watch 4 LTE Classic 46mm có thiết kế trẻ trung\"> </a></p><p class=\"ql-align-justify\"> <br></p><h3 class=\"ql-align-justify\">Bộ vi xử lý Exynos W920 với tốc độ nhanh hơn 20% so với dòng cũ</h3><p class=\"ql-align-justify\">Galaxy Watch4 Series là dòng Galaxy Watch đầu tiên sử dụng vi xử lý Exynos W920 có tiến trình 5 nm với CPU nhanh hơn 20%, RAM nhiều hơn 50% và GPU nhanh hơn 10 lần so với chip Exynos 9110 của dòng Galaxy Watch 3. Điều này đem đến cho người dùng thao tác cuộn, lướt mượt mà, cho bạn những trải nghiệm thú vị.</p><p class=\"ql-align-justify\"> <br></p><p class=\"ql-align-justify\"> <a href=\"https://cdn.tgdd.vn/Products/Images/7077/248765/samsung-galaxy-watch-4-lte-classic-46mm-2-fix.jpg\" target=\"_blank\" style=\"color: rgb(47, 128, 237);\"> <img src=\"https://cdn.tgdd.vn/Products/Images/7077/248765/samsung-galaxy-watch-4-lte-classic-46mm-2-fix.jpg\" alt=\"Samsung Galaxy Watch 4 LTE Classic 46mm có bộ chip xử lý cho hiệu năng mạnh mẽ\"> </a></p><p class=\"ql-align-justify\"> <br></p><h3 class=\"ql-align-justify\">Hệ điều hành&nbsp;Wear OS&nbsp;trên nền giao diện One UI Watch</h3><p class=\"ql-align-justify\">Tự hào là chiếc Galaxy Watch đầu tiên dùng hệ điều hành Wear OS&nbsp;trên nền giao diện One UI Watch 3.5, đồng hồ thông minh Galaxy Watch 4 LTE Classic được cải tiến về hiệu suất, cho người dùng trải nghiệm liền mạch hơn giữa các thiết bị và có thể truy cập vào nhiều ứng dụng hơn nữa.</p><p class=\"ql-align-justify\">Bên cạnh đó, nền tảng mới này sẽ giúp Galaxy Watch và smartphone kết nối với nhau một cách toàn diện hơn, việc đồng bộ dữ liệu giữa điện thoại và đồng hồ cũng diễn ra nhanh chóng, đem đến cho bạn những trải nghiệm tốt hơn.</p><p> <br></p>",
       "id": 1
     },
     {
@@ -29,7 +38,7 @@
       "id": 3
     },
     {
-      "name": "Samsung Note 20",
+      "name": "Samsung Note 20 Ahihi Ahihi",
       "categoryId": 2,
       "price": 15000000,
       "id": 4
@@ -121,66 +130,150 @@
       "createdAt": 1689769932260,
       "updatedAt": 1689769932262,
       "id": 7
+    },
+    {
+      "rate": 5,
+      "comment": "OK",
+      "userId": 1,
+      "productId": 3,
+      "createdAt": 1690882114450,
+      "updatedAt": 1690882114457,
+      "id": 8
     }
   ],
-  "favorites": [],
+  "favorites": [
+    {
+      "productId": 3,
+      "userId": 1,
+      "createdAt": 1690980840104,
+      "updatedAt": 1690980840104,
+      "id": 1
+    },
+    {
+      "productId": 6,
+      "userId": 1,
+      "createdAt": 1690980844970,
+      "updatedAt": 1690980844970,
+      "id": 2
+    },
+    {
+      "productId": 5,
+      "userId": 1,
+      "createdAt": 1690980852995,
+      "updatedAt": 1690980852995,
+      "id": 3
+    }
+  ],
   "orders": [
     {
-      "fullName": "Le Ba Thanh Tuan",
-      "email": "le.ba.thanh.tuan@sun-asterisk.com",
-      "phoneNumber": "+84849954060",
+      "fullName": "Tuan",
+      "email": "tuan@gmail.com",
+      "phoneNumber": "123456789",
       "cityCode": "79",
-      "districtCode": "771",
-      "wardCode": "27199",
+      "districtCode": "761",
+      "wardCode": "26764",
       "address": "123 ABC",
       "paymentMethod": "cod",
       "cityName": "Thành phố Hồ Chí Minh",
-      "districtName": "Quận 10",
-      "wardName": "Phường 05",
+      "districtName": "Quận 12",
+      "wardName": "Phường Thạnh Xuân",
       "userId": 1,
-      "totalPrice": 230000000,
+      "totalPrice": 290000000,
       "status": "pending",
-      "createdAt": 1690807253612,
-      "updatedAt": 1690807253614,
+      "createdAt": 1690978518560,
+      "updatedAt": 1690978518561,
       "id": 1
+    },
+    {
+      "fullName": "Le Ba Thanh Tuan",
+      "email": "le.ba.thanh.tuan@sun-asterisk.com",
+      "phoneNumber": "123456789",
+      "cityCode": "79",
+      "districtCode": "773",
+      "wardCode": "27268",
+      "address": "123 ABC",
+      "paymentMethod": "cod",
+      "cityName": "Thành phố Hồ Chí Minh",
+      "districtName": "Quận 4",
+      "wardName": "Phường 08",
+      "userId": 1,
+      "totalPrice": 105000000,
+      "status": "pending",
+      "createdAt": 1690979407193,
+      "updatedAt": 1690979407193,
+      "id": 2
     }
   ],
   "orderDetails": [
     {
       "orderId": 1,
-      "name": "Samsung Note 20",
-      "price": 15000000,
+      "productId": 7,
+      "name": "Xiaomi Mi 14",
+      "price": 20000000,
       "quantity": 1,
-      "createdAt": 1690807253746,
-      "updatedAt": 1690807253746,
+      "createdAt": 1690978518648,
+      "updatedAt": 1690978518648,
       "id": 1
     },
     {
       "orderId": 1,
+      "productId": 3,
       "name": "Samsung Note 20",
       "price": 15000000,
-      "quantity": 1,
-      "createdAt": 1690807253860,
-      "updatedAt": 1690807253860,
+      "quantity": 2,
+      "createdAt": 1690978518720,
+      "updatedAt": 1690978518720,
       "id": 2
     },
     {
       "orderId": 1,
-      "name": "iPhone 14",
-      "price": 25000000,
-      "quantity": 2,
-      "createdAt": 1690807253940,
-      "updatedAt": 1690807253940,
+      "productId": 4,
+      "name": "Samsung Note 20",
+      "price": 15000000,
+      "quantity": 1,
+      "createdAt": 1690978518767,
+      "updatedAt": 1690978518767,
       "id": 3
     },
     {
       "orderId": 1,
+      "productId": 1,
+      "name": "iPhone 14",
+      "price": 25000000,
+      "quantity": 3,
+      "createdAt": 1690978518830,
+      "updatedAt": 1690978518830,
+      "id": 4
+    },
+    {
+      "orderId": 1,
+      "productId": 2,
       "name": "iPhone 14 Pro",
       "price": 30000000,
       "quantity": 5,
-      "createdAt": 1690807254017,
-      "updatedAt": 1690807254017,
-      "id": 4
+      "createdAt": 1690978518883,
+      "updatedAt": 1690978518884,
+      "id": 5
+    },
+    {
+      "orderId": 2,
+      "productId": 1,
+      "name": "iPhone 14",
+      "price": 25000000,
+      "quantity": 3,
+      "createdAt": 1690979407328,
+      "updatedAt": 1690979407328,
+      "id": 6
+    },
+    {
+      "orderId": 2,
+      "productId": 2,
+      "name": "iPhone 14 Pro",
+      "price": 30000000,
+      "quantity": 1,
+      "createdAt": 1690979407410,
+      "updatedAt": 1690979407410,
+      "id": 7
     }
   ],
   "cities": [

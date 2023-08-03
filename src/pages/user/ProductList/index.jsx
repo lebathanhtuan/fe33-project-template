@@ -1,9 +1,28 @@
 import { useEffect, useMemo } from "react";
-import { Card, Row, Col, Checkbox, Select, Button } from "antd";
+import {
+  Card,
+  Row,
+  Col,
+  Checkbox,
+  Select,
+  Button,
+  Segmented,
+  Space,
+  Breadcrumb,
+  Rate,
+} from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, generatePath, useNavigate } from "react-router-dom";
+import {
+  AppstoreOutlined,
+  BarsOutlined,
+  HomeOutlined,
+  HeartOutlined,
+  CommentOutlined,
+} from "@ant-design/icons";
 import qs from "qs";
 
+import T from "components/Typography";
 import { PRODUCT_LIMIT } from "constants/paging";
 import { getProductListRequest } from "redux/slicers/product.slice";
 import { setFilterParams, clearFilterParams } from "redux/slicers/common.slice";
@@ -73,12 +92,49 @@ function ProductListPage() {
 
   const renderProductList = useMemo(() => {
     return productList.data.map((item) => {
+      const averageRate = item.reviews.length
+        ? (
+            item.reviews.reduce((total, item) => total + item.rate, 0) /
+            item.reviews.length
+          ).toFixed(1)
+        : 0;
       return (
-        <Col key={item.id} xs={12} xl={8}>
+        <Col key={item.id} lg={6} md={6} sm={8} xs={12}>
           <Link to={generatePath(ROUTES.USER.PRODUCT_DETAIL, { id: item.id })}>
-            <Card title={item.name} size="small" bordered={false}>
-              <p>{item.reviews.length} đánh giá</p>
-              <p>{item.price.toLocaleString()} VND</p>
+            <Card
+              hoverable
+              size="small"
+              bordered={false}
+              cover={
+                <img
+                  alt="example"
+                  src="https://dummyimage.com/800x1000/5f9ea0/fff"
+                />
+              }
+              actions={[
+                <Space>
+                  <HeartOutlined key="favorite" />
+                  <span>{item.favorites.length}</span>
+                </Space>,
+                <Space>
+                  <CommentOutlined key="review" />
+                  <span>{item.reviews.length}</span>
+                </Space>,
+              ]}
+            >
+              <T.Text size="xs">{item.category.name}</T.Text>
+              <T.Title size="lg" truncateMultiLine={2} style={{ height: 54 }}>
+                {item.name}
+              </T.Title>
+              <Rate
+                value={averageRate}
+                allowHalf
+                disabled
+                style={{ fontSize: 12 }}
+              />
+              <T.Text size="lg" style={{ color: "#006363" }}>
+                {item.price.toLocaleString()} ₫
+              </T.Text>
             </Card>
           </Link>
         </Col>
@@ -88,7 +144,24 @@ function ProductListPage() {
 
   return (
     <S.ProductListWrapper>
-      <Row gutter={[16, 16]}>
+      <Breadcrumb
+        items={[
+          {
+            title: (
+              <Link to={ROUTES.USER.HOME}>
+                <Space>
+                  <HomeOutlined />
+                  <span>Trang chủ</span>
+                </Space>
+              </Link>
+            ),
+          },
+          {
+            title: "Danh sách sản phẩm",
+          },
+        ]}
+      />
+      <Row gutter={[16, 16]} style={{ marginTop: 16 }}>
         <Col lg={6} xs={24}>
           <Card title="Filter" size="small" bordered={false}>
             <Checkbox.Group
@@ -100,28 +173,50 @@ function ProductListPage() {
           </Card>
         </Col>
         <Col lg={18} xs={24}>
-          <Row align="middle" gutter={[16, 16]} style={{ marginBottom: 16 }}>
-            <Col md={16} xs={24}>
-              <p>Tìm thấy: {productList.meta.total} kết quả</p>
-            </Col>
-            <Col md={8} xs={24}>
-              <Row align="middle">
-                <p>Sắp xếp theo:</p>
-                <Select
-                  onChange={(value) => handleFilter("sort", value)}
-                  value={filterParams.sort}
-                  placeholder="Sắp xếp"
-                  style={{ marginLeft: 8, flex: 1 }}
-                >
-                  <Select.Option value="name.asc">A-Z</Select.Option>
-                  <Select.Option value="name.desc">Z-A</Select.Option>
-                  <Select.Option value="price.asc">Giá tăng dần</Select.Option>
-                  <Select.Option value="price.desc">Giá giảm dần</Select.Option>
-                </Select>
-              </Row>
-            </Col>
+          <Card size="small" bordered={false}>
+            <Row gutter={[16, 16]}>
+              <Col md={16} xs={24}>
+                <T.Text style={{ marginTop: 6 }}>
+                  {`Hiển thị 1 - ${productList.data.length} của ${productList.meta.total} sản phẩm`}
+                </T.Text>
+              </Col>
+              <Col md={8} xs={24} style={{ textAlign: "right" }}>
+                <Space>
+                  <Select
+                    onChange={(value) => handleFilter("sort", value)}
+                    value={filterParams.sort}
+                    placeholder="Sắp xếp theo"
+                    bordered={false}
+                    style={{ width: 130 }}
+                  >
+                    <Select.Option value="name.asc">Tên A-Z</Select.Option>
+                    <Select.Option value="name.desc">Tên Z-A</Select.Option>
+                    <Select.Option value="price.asc">
+                      Giá tăng dần
+                    </Select.Option>
+                    <Select.Option value="price.desc">
+                      Giá giảm dần
+                    </Select.Option>
+                  </Select>
+                  <Segmented
+                    options={[
+                      {
+                        value: "card",
+                        icon: <AppstoreOutlined />,
+                      },
+                      {
+                        value: "list",
+                        icon: <BarsOutlined />,
+                      },
+                    ]}
+                  />
+                </Space>
+              </Col>
+            </Row>
+          </Card>
+          <Row gutter={[16, 16]} style={{ marginTop: 16 }}>
+            {renderProductList}
           </Row>
-          <Row gutter={[16, 16]}>{renderProductList}</Row>
           {productList.data.length !== productList.meta.total && (
             <Row justify="center" style={{ marginTop: 16 }}>
               <Button onClick={() => handleShowMore()}>Hiểu thị thêm</Button>

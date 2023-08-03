@@ -1,10 +1,15 @@
 import { useMemo, useEffect, useState } from "react";
-import { Space, Button, Dropdown, Badge, Input } from "antd";
+import { Space, Button, Dropdown, Badge, Input, Avatar } from "antd";
 import { useNavigate, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { ShoppingCartOutlined, SearchOutlined } from "@ant-design/icons";
+import {
+  ShoppingCartOutlined,
+  SearchOutlined,
+  UserOutlined,
+} from "@ant-design/icons";
 import qs from "qs";
 
+import T from "components/Typography";
 import { ROUTES } from "constants/routes";
 import { PRODUCT_LIMIT } from "constants/paging";
 import { logoutRequest } from "redux/slicers/auth.slice";
@@ -80,7 +85,9 @@ function Header() {
   return (
     <S.HeaderWrapper>
       <S.HeaderTopWrapper>
-        <h3>Logo</h3>
+        <Link to={ROUTES.USER.HOME}>
+          <T.Title level={2}>Logo</T.Title>
+        </Link>
         <S.SearchContainer>
           <Input
             size="large"
@@ -96,7 +103,9 @@ function Header() {
         <Space size={24}>
           <Badge count={cartList.length}>
             <Link to={ROUTES.USER.CART}>
-              <Button type="text" icon={<ShoppingCartOutlined />}></Button>
+              <ShoppingCartOutlined
+                style={{ fontSize: 24, color: "#414141" }}
+              />
             </Link>
           </Badge>
           {userInfo.data.id ? (
@@ -116,9 +125,13 @@ function Header() {
                 ],
               }}
             >
-              <div>
-                <h3>{userInfo.data.fullName}</h3>
-              </div>
+              <Space>
+                <Avatar
+                  style={{ backgroundColor: "#87d068" }}
+                  icon={<UserOutlined />}
+                />
+                <T.Title>{userInfo.data.fullName}</T.Title>
+              </Space>
             </Dropdown>
           ) : (
             <Button type="primary" onClick={() => navigate(ROUTES.LOGIN)}>

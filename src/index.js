@@ -17,8 +17,8 @@ root.render(
       <ConfigProvider
         theme={{
           token: {
-            colorPrimary: "#faad14",
-            borderRadius: 0,
+            colorPrimary: "#13c2c2",
+            borderRadius: 4,
           },
         }}
       >

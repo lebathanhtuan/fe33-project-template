@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import jwtDecode from "jwt-decode";
@@ -22,6 +22,8 @@ import { light, dark } from "themes";
 function App() {
   const dispatch = useDispatch();
 
+  const { pathname } = useLocation();
+
   const { theme } = useSelector((state) => state.common);
 
   useEffect(() => {
@@ -35,6 +37,10 @@ function App() {
       );
     }
   }, []);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
 
   return (
     <ThemeProvider theme={theme === "light" ? light : dark}>

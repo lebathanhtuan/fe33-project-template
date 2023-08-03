@@ -20,7 +20,7 @@ function* getProductListSaga(action) {
     const result = yield axios.get("http://localhost:4000/products", {
       params: {
         _expand: "category",
-        _embed: "reviews",
+        _embed: ["reviews", "favorites"],
         _page: page,
         _limit: limit,
         categoryId: categoryId,
@@ -50,6 +50,7 @@ function* getProductDetailSaga(action) {
     const result = yield axios.get(`http://localhost:4000/products/${id}`, {
       params: {
         _expand: "category",
+        _embed: "favorites",
       },
     });
     yield put(getProductDetailSuccess({ data: result.data }));

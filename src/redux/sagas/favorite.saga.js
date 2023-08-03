@@ -30,15 +30,10 @@ function* getFavoriteListSaga(action) {
 
 function* favoriteProductSaga(action) {
   try {
-    const { productId } = action.payload;
     const result = yield axios.post(
       "http://localhost:4000/favorites",
       action.payload
     );
-    // yield put({
-    //   type: REQUEST(PRODUCT_ACTION.GET_PRODUCT_DETAIL),
-    //   payload: { id: productId },
-    // });
     yield put(favoriteProductSuccess({ data: result.data }));
   } catch (e) {
     yield put(favoriteProductFailure({ error: "Lỗi" }));
@@ -47,12 +42,8 @@ function* favoriteProductSaga(action) {
 
 function* unFavoriteProductSaga(action) {
   try {
-    const { id, productId } = action.payload;
+    const { id } = action.payload;
     yield axios.delete(`http://localhost:4000/favorites/${id}`);
-    // yield put({
-    //   type: REQUEST(PRODUCT_ACTION.GET_PRODUCT_DETAIL),
-    //   payload: { id: productId },
-    // });
     yield put(unFavoriteProductSuccess({ id: id }));
   } catch (e) {
     yield put(unFavoriteProductFailure({ error: "Lỗi" }));
