@@ -6,6 +6,7 @@ import {
   ShoppingCartOutlined,
   SearchOutlined,
   UserOutlined,
+  LogoutOutlined,
 } from "@ant-design/icons";
 import qs from "qs";
 
@@ -115,21 +116,30 @@ function Header() {
                   {
                     key: 1,
                     label: "Thông tin cá nhân",
-                    onClick: () => navigate(ROUTES.USER.PROFILE),
+                    onClick: () => navigate(ROUTES.USER.USER_INFO),
+                    icon: <UserOutlined />,
                   },
                   {
                     key: 2,
                     label: "Đăng xuất",
                     onClick: () => dispatch(logoutRequest()),
+                    icon: <LogoutOutlined />,
                   },
                 ],
               }}
             >
-              <Space>
-                <Avatar
-                  style={{ backgroundColor: "#87d068" }}
-                  icon={<UserOutlined />}
-                />
+              <Space style={{ cursor: "pointer" }}>
+                {userInfo.data.avatar ? (
+                  <S.AvatarPreview
+                    src={userInfo.data.avatar}
+                    alt="User profile picture"
+                  />
+                ) : (
+                  <Avatar
+                    style={{ backgroundColor: "#87d068" }}
+                    icon={<UserOutlined />}
+                  />
+                )}
                 <T.Title>{userInfo.data.fullName}</T.Title>
               </Space>
             </Dropdown>

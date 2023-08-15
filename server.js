@@ -1,6 +1,6 @@
 const jsonServer = require("json-server");
 const auth = require("json-server-auth");
-const moment = require("moment");
+const dayjs = require("dayjs");
 
 const server = jsonServer.create();
 const router = jsonServer.router("./db/data.json");
@@ -14,8 +14,8 @@ server.use(jsonServer.bodyParser);
 
 server.use((req, res, next) => {
   if (req.method === "POST") {
-    req.body.createdAt = moment().valueOf();
-    req.body.updatedAt = moment().valueOf();
+    req.body.createdAt = dayjs().valueOf();
+    req.body.updatedAt = dayjs().valueOf();
   }
 
   if (req.method === "PUT") {
@@ -23,7 +23,7 @@ server.use((req, res, next) => {
   }
 
   if (req.method === "PATCH") {
-    req.body.updatedAt = moment().valueOf();
+    req.body.updatedAt = dayjs().valueOf();
   }
 
   next();

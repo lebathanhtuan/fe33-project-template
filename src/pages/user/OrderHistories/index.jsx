@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { Table } from "antd";
 import { useDispatch, useSelector } from "react-redux";
-import moment from "moment";
+import dayjs from "dayjs";
 
 import { getOrderListRequest } from "redux/slicers/order.slice";
 
@@ -39,7 +39,7 @@ const OrderHistories = () => {
       title: "Ngày đặt hàng",
       dataIndex: "createdAt",
       key: "createdAt",
-      render: (createdAt) => moment(createdAt).format("DD/MM/YYYY HH:mm"),
+      render: (createdAt) => dayjs(createdAt).format("DD/MM/YYYY HH:mm"),
     },
     {
       title: "Địa chỉ giao hàng",

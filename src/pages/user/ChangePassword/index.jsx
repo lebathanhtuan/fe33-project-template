@@ -44,7 +44,7 @@ function ChangePassword() {
       autoComplete="off"
     >
       <Form.Item
-        label="Password"
+        label="Mật khẩu cũ"
         name="password"
         rules={[
           {
@@ -56,7 +56,7 @@ function ChangePassword() {
         <Input.Password />
       </Form.Item>
       <Form.Item
-        label="New password"
+        label="Mật khẩu mới"
         name="newPassword"
         rules={[
           {
@@ -68,7 +68,7 @@ function ChangePassword() {
         <Input.Password />
       </Form.Item>
       <Form.Item
-        label="Confirm new password"
+        label="Xác nhận mật khẩu mới"
         name="confirmNewPassword"
         rules={[
           {
@@ -95,7 +95,7 @@ function ChangePassword() {
         block
         loading={changePasswordData.load}
       >
-        Submit
+        Thay đổi
       </Button>
     </Form>
   );

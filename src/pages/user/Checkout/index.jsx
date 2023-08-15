@@ -1,6 +1,6 @@
 import { useEffect, useMemo } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   Form,
   Button,
@@ -12,9 +12,13 @@ import {
   Card,
   Space,
   Table,
+  Breadcrumb,
 } from "antd";
+import { HomeOutlined } from "@ant-design/icons";
 
+import T from "components/Typography";
 import { ROUTES } from "constants/routes";
+import { GUEST_ID } from "constants/order";
 import {
   getCityListRequest,
   getDistrictListRequest,
@@ -88,7 +92,7 @@ function CheckoutPage() {
           cityName: cityData?.name,
           districtName: districtData?.name,
           wardName: wardData?.name,
-          userId: userInfo.data.id,
+          userId: userInfo.data.id ? userInfo.data.id : GUEST_ID,
           totalPrice: totalPrice,
           status: "pending",
         },
@@ -130,7 +134,26 @@ function CheckoutPage() {
 
   return (
     <S.CheckoutWrapper>
-      <h2 style={{ marginBottom: 24 }}>Thủ tục thanh toán</h2>
+      <Breadcrumb
+        items={[
+          {
+            title: (
+              <Link to={ROUTES.USER.HOME}>
+                <Space>
+                  <HomeOutlined />
+                  <span>Trang chủ</span>
+                </Space>
+              </Link>
+            ),
+          },
+          {
+            title: "Thủ tục thanh toán",
+          },
+        ]}
+      />
+      <T.Title level={2} style={{ marginBottom: 16, textAlign: "center" }}>
+        Thủ tục thanh toán
+      </T.Title>
       <Row gutter={[16, 16]}>
         <Col span={14}>
           <Form

@@ -22,6 +22,10 @@ const initialState = {
     load: false,
     error: "",
   },
+  changeAvatarData: {
+    load: false,
+    error: "",
+  },
 };
 
 export const authSlice = createSlice({
@@ -37,11 +41,13 @@ export const authSlice = createSlice({
       const { data } = action.payload;
       state.loginData.loading = false;
       state.userInfo.data = data;
+      state.userInfo.loading = false;
     },
     loginFailure: (state, action) => {
       const { error } = action.payload;
       state.loginData.loading = false;
       state.loginData.error = error;
+      state.userInfo.loading = false;
     },
     // register
     registerRequest: (state, action) => {
@@ -97,14 +103,27 @@ export const authSlice = createSlice({
       state.changePasswordData.error = null;
     },
     changePasswordSuccess: (state, action) => {
-      const { data } = action.payload;
-      state.changePasswordData.data = data;
       state.changePasswordData.loading = false;
     },
     changePasswordFailure: (state, action) => {
       const { error } = action.payload;
       state.changePasswordData.loading = false;
       state.changePasswordData.error = error;
+    },
+    // changeAvatar
+    changeAvatarRequest: (state, action) => {
+      state.changeAvatarData.loading = true;
+      state.changeAvatarData.error = null;
+    },
+    changeAvatarSuccess: (state, action) => {
+      const { avatar } = action.payload;
+      state.changeAvatarData.loading = false;
+      state.userInfo.data.avatar = avatar;
+    },
+    changeAvatarFailure: (state, action) => {
+      const { error } = action.payload;
+      state.changeAvatarData.loading = false;
+      state.changeAvatarData.error = error;
     },
   },
 });
@@ -126,6 +145,9 @@ export const {
   changePasswordRequest,
   changePasswordSuccess,
   changePasswordFailure,
+  changeAvatarRequest,
+  changeAvatarSuccess,
+  changeAvatarFailure,
 } = authSlice.actions;
 
 export default authSlice.reducer;

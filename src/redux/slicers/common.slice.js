@@ -4,7 +4,6 @@ import qs from "qs";
 const locationSearch = qs.parse(window.location.search, {
   ignoreQueryPrefix: true,
 });
-console.log("🚀 ~ file: common.slice.js:7 ~ locationSearch:", locationSearch);
 
 const initialState = {
   theme: "light",

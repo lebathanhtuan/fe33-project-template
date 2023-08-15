@@ -65,3 +65,10 @@ export const NavLinkItem = styled.div`
     transition: all 0.3s;
   }
 `;
+
+export const AvatarPreview = styled.img`
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+`;

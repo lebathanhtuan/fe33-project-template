@@ -1,36 +1,37 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Button, Form, Input, DatePicker } from "antd";
+import dayjs from "dayjs";
 
-import { changePasswordRequest } from "redux/slicers/auth.slice";
+import { updateUserInfoRequest } from "redux/slicers/auth.slice";
 
 function UserInfo() {
   const [updateUserInfoForm] = Form.useForm();
 
-  const { userInfo, changePasswordData } = useSelector((state) => state.auth);
+  const { userInfo, updateUserInfoData } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
+  const initialValues = {
+    fullName: userInfo.data.fullName,
+    email: userInfo.data.email,
+    phoneNumber: userInfo.data.phoneNumber,
+    birthday: dayjs(userInfo.data.birthday),
+  };
+
   useEffect(() => {
-    if (changePasswordData.error) {
-      updateUserInfoForm.setFields([
-        {
-          name: "password",
-          errors: ["Password is incorrect!"],
-        },
-      ]);
+    if (userInfo.data.id) {
+      updateUserInfoForm.resetFields();
     }
-  }, [changePasswordData.error]);
+  }, [userInfo.data]);
 
   const handleUpdateUserInfo = (values) => {
     dispatch(
-      changePasswordRequest({
+      updateUserInfoRequest({
         id: userInfo.data.id,
         data: {
-          email: userInfo.data.email,
-          password: values.password,
-          newPassword: values.newPassword,
+          ...values,
+          birthday: dayjs(values.birthday).valueOf(),
         },
-        callback: () => updateUserInfoForm.resetFields(),
       })
     );
   };
@@ -40,8 +41,8 @@ function UserInfo() {
       form={updateUserInfoForm}
       name="updateUserInfoForm"
       layout="vertical"
+      initialValues={initialValues}
       onFinish={(values) => handleUpdateUserInfo(values)}
-      autoComplete="off"
     >
       <Form.Item
         label="Họ và tên"
@@ -63,7 +64,7 @@ function UserInfo() {
           },
         ]}
       >
-        <Input />
+        <Input disabled />
       </Form.Item>
       <Form.Item
         label="Số điện thoại"
@@ -74,7 +75,7 @@ function UserInfo() {
           },
         ]}
       >
-        <Input.Password />
+        <Input />
       </Form.Item>
       <Form.Item
         label="Ngày sinh"
@@ -85,15 +86,15 @@ function UserInfo() {
           },
         ]}
       >
-        <DatePicker />
+        <DatePicker placeholder="Chọn ngày" />
       </Form.Item>
       <Button
         type="primary"
         htmlType="submit"
         block
-        loading={changePasswordData.load}
+        loading={updateUserInfoData.load}
       >
-        Submit
+        Cập nhật
       </Button>
     </Form>
   );

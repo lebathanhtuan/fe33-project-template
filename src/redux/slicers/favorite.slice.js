@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   favoriteList: {
     data: [],
+    meta: {},
     loading: false,
     error: null,
   },
@@ -26,9 +27,10 @@ export const favoriteSlice = createSlice({
       state.favoriteList.error = null;
     },
     getFavoriteListSuccess: (state, action) => {
-      const { data } = action.payload;
+      const { data, meta } = action.payload;
       state.favoriteList.loading = false;
       state.favoriteList.data = data;
+      state.favoriteList.meta = meta;
     },
     getFavoriteListFailure: (state, action) => {
       const { error } = action.payload;

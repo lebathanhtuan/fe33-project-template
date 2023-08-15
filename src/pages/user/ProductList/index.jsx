@@ -123,7 +123,7 @@ function ProductListPage() {
               ]}
             >
               <T.Text size="xs">{item.category.name}</T.Text>
-              <T.Title size="lg" truncateMultiLine={2} style={{ height: 54 }}>
+              <T.Title size="lg" truncateMultiLine={2} style={{ height: 48 }}>
                 {item.name}
               </T.Title>
               <Rate

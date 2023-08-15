@@ -1,7 +1,18 @@
-import { Table, Button, InputNumber, Row, Col, Card } from "antd";
+import {
+  Table,
+  Button,
+  InputNumber,
+  Row,
+  Col,
+  Card,
+  Space,
+  Breadcrumb,
+} from "antd";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { HomeOutlined } from "@ant-design/icons";
 
+import T from "components/Typography";
 import { ROUTES } from "constants/routes";
 import { updateCartRequest, deleteCartRequest } from "redux/slicers/cart.slice";
 
@@ -78,7 +89,26 @@ function CartPage() {
 
   return (
     <S.CartListWrapper>
-      <h2 style={{ marginBottom: 24 }}>Giỏ hàng</h2>
+      <Breadcrumb
+        items={[
+          {
+            title: (
+              <Link to={ROUTES.USER.HOME}>
+                <Space>
+                  <HomeOutlined />
+                  <span>Trang chủ</span>
+                </Space>
+              </Link>
+            ),
+          },
+          {
+            title: "Giỏ hàng",
+          },
+        ]}
+      />
+      <T.Title level={2} style={{ marginBottom: 16, textAlign: "center" }}>
+        Giỏ hàng
+      </T.Title>
       <Card size="small">
         <Table
           columns={tableColumn}

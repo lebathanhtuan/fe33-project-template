@@ -3,12 +3,17 @@ import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import { ConfigProvider } from "antd";
-import "moment/locale/vi";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
+import "dayjs/locale/vi";
 
 import App from "./App";
 import { store } from "./store";
 import reportWebVitals from "./reportWebVitals";
 import "./index.css";
+
+dayjs.locale("vi");
+dayjs.extend(relativeTime);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

@@ -64,8 +64,10 @@ export const productSlice = createSlice({
     },
     [unFavoriteProductSuccess.type]: (state, action) => {
       const { id } = action.payload;
-      state.productDetail.data.favorites =
-        state.productDetail.data.favorites.filter((item) => item.id !== id);
+      if (state.productDetail.data.favorites?.length) {
+        state.productDetail.data.favorites =
+          state.productDetail.data.favorites.filter((item) => item.id !== id);
+      }
     },
   },
 });

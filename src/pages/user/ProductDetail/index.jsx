@@ -20,7 +20,7 @@ import {
   HeartFilled,
   HomeOutlined,
 } from "@ant-design/icons";
-import moment from "moment";
+import dayjs from "dayjs";
 import qs from "qs";
 
 import T from "components/Typography";
@@ -182,7 +182,7 @@ const ProductDetailPage = () => {
         <S.ReviewItemWrapper key={item.id}>
           <Space>
             <T.Title>{item.user.fullName}</T.Title>
-            <T.Text size="sm">{moment(item.createdAt).fromNow()}</T.Text>
+            <T.Text size="sm">{dayjs(item.createdAt).fromNow()}</T.Text>
           </Space>
           <Rate
             value={item.rate}

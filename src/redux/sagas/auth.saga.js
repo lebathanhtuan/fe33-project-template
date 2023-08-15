@@ -17,6 +17,9 @@ import {
   changePasswordRequest,
   changePasswordSuccess,
   changePasswordFailure,
+  changeAvatarRequest,
+  changeAvatarSuccess,
+  changeAvatarFailure,
 } from "redux/slicers/auth.slice";
 
 function* loginSaga(action) {
@@ -83,10 +86,21 @@ function* changePasswordSaga(action) {
   }
 }
 
+function* changeAvatarSaga(action) {
+  try {
+    const { id, avatar } = action.payload;
+    yield axios.patch(`http://localhost:4000/users/${id}`, { avatar: avatar });
+    yield put(changeAvatarSuccess({ avatar: avatar }));
+  } catch (e) {
+    yield put(changeAvatarFailure({ error: "Lỗi" }));
+  }
+}
+
 export default function* categorySaga() {
   yield takeEvery(loginRequest.type, loginSaga);
   yield takeEvery(registerRequest.type, registerSaga);
   yield takeEvery(getUserInfoRequest.type, getUserInfoSaga);
   yield takeEvery(updateUserInfoRequest.type, updateUserInfoSaga);
   yield takeEvery(changePasswordRequest.type, changePasswordSaga);
+  yield takeEvery(changeAvatarRequest.type, changeAvatarSaga);
 }

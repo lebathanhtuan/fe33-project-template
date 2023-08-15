@@ -34,6 +34,10 @@ const RegisterPage = () => {
           fullName: values.fullName,
           email: values.email,
           password: values.password,
+          birthday: 0,
+          phoneNumber: "",
+          avatar: "",
+          role: "user",
         },
         callback: () => navigate(ROUTES.LOGIN),
       })
